@@ -266,10 +266,10 @@
          @see https://www.w3.org/TR/SVG/paths.html#PathData
          -->
     <string translatable="false" name="config_mainBuiltInDisplayCutout">
-        M 0,83
-        M -41,83
-        A 41,41 0 1,0 41,83
-        A 41,41 0 1,0 -41,83
+        M 0,82
+        M -37,82
+        A 37,37 0 1,0 37,82
+        A 37,37 0 1,0 -37,82
         Z
     </string>
 
@@ -280,10 +280,10 @@
          config_mainBuiltInDisplayCutout
          -->
     <string translatable="false" name="config_mainBuiltInDisplayCutoutRectApproximation">
-        M -39,0
-        L -39,141
+        M -38,0
+        L -38,141
         L 38,141
-        L 39,0
+        L 38,0
         Z
     </string>
 
@@ -296,5 +296,5 @@
          then the device will use the width and height of the default display the first time it's
          booted.  -->
     <integer name="config_stableDeviceDisplayWidth">1272</integer>
-    <integer name="config_stableDeviceDisplayHeight">2772</integer>
+    <integer name="config_stableDeviceDisplayHeight">2800</integer>
 </resources>

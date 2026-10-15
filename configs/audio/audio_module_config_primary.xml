@@ -20,10 +20,13 @@ SPDX-License-Identifier: BSD-3-Clause-Clear
         <mixPort name="raw_out" role="source" flags="FAST RAW">
             <profile samplingRates="48000" channelLayouts="LAYOUT_STEREO" formatType="PCM" pcmType="INT_24_BIT" />
         </mixPort>
-        <mixPort name="haptics_out" role="source" flags="FAST">
+        <!-- #ifndef OPLUS_ARCH_EXTENDS
+        // Nan.Zhong@MULTIMEDIA.AUDIODRIVER.HAL, 2024/12/20, Remove haptics output
+        <mixPort name="haptics_out" role="source">
             <profile samplingRates="48000" channelLayouts="LAYOUT_STEREO_HAPTIC_A" formatType="PCM" pcmType="INT_16_BIT" />
         </mixPort>
-        <mixPort name="deep_buffer_out" role="source" flags="DEEP_BUFFER" recommendedMuteDurationMs="300">
+        #endif OPLUS_ARCH_EXTENDS -->
+        <mixPort name="deep_buffer_out" role="source" flags="DEEP_BUFFER">
             <!-- #ifndef OPLUS_FEATURE_PLAYBACK_24BIT
             // Jianfeng.Qiu@MULTIMEDIA.AUDIODRIVER.HAL, 2024/05/15, Modify for support playback with 24bits
             <profile samplingRates="48000" channelLayouts="LAYOUT_STEREO" formatType="PCM" pcmType="INT_16_BIT" />
@@ -200,13 +203,13 @@ SPDX-License-Identifier: BSD-3-Clause-Clear
         <devicePort tagName="fm_out" deviceType="OUT_FM" role="sink" attached="true">
             <profile samplingRates="48000" channelLayouts="LAYOUT_MONO LAYOUT_STEREO" formatType="PCM" pcmType="INT_16_BIT" />
         </devicePort>
-        <devicePort tagName="bt_a2dp_out" deviceType="OUT_DEVICE" connection="bt-a2dp" role="sink" encodings="audio/x-sbc audio/mp4a.40 audio/aptx audio/vnd.qcom.aptx.hd audio/vnd.sony.ldac audio/x-celt audio/vnd.qcom.aptx.adaptive audio/vnd.qcom.aptx.twsp">
+        <devicePort tagName="bt_a2dp_out" deviceType="OUT_DEVICE" connection="bt-a2dp" role="sink" encodings="audio/x-sbc audio/mp4a.40 audio/aptx audio/vnd.qcom.aptx.hd audio/vnd.sony.ldac audio/x-celt audio/vnd.qcom.aptx.adaptive audio/vnd.qcom.aptx.twsp audio/x-lc3">
             <profile samplingRates="48000" channelLayouts="LAYOUT_STEREO" formatType="PCM" pcmType="INT_16_BIT" />
         </devicePort>
-        <devicePort tagName="bt_a2dp_headphones" deviceType="OUT_HEADPHONE" connection="bt-a2dp" role="sink" encodings="audio/x-sbc audio/mp4a.40 audio/aptx audio/vnd.qcom.aptx.hd audio/vnd.sony.ldac audio/x-celt audio/vnd.qcom.aptx.adaptive audio/vnd.qcom.aptx.twsp">
+        <devicePort tagName="bt_a2dp_headphones" deviceType="OUT_HEADPHONE" connection="bt-a2dp" role="sink" encodings="audio/x-sbc audio/mp4a.40 audio/aptx audio/vnd.qcom.aptx.hd audio/vnd.sony.ldac audio/x-celt audio/vnd.qcom.aptx.adaptive audio/vnd.qcom.aptx.twsp audio/x-lc3">
             <profile samplingRates="48000" channelLayouts="LAYOUT_STEREO" formatType="PCM" pcmType="INT_16_BIT" />
         </devicePort>
-        <devicePort tagName="bt_a2dp_speaker" deviceType="OUT_SPEAKER" connection="bt-a2dp" role="sink" encodings="audio/x-sbc audio/mp4a.40 audio/aptx audio/vnd.qcom.aptx.hd audio/vnd.sony.ldac audio/x-celt audio/vnd.qcom.aptx.adaptive audio/vnd.qcom.aptx.twsp">
+        <devicePort tagName="bt_a2dp_speaker" deviceType="OUT_SPEAKER" connection="bt-a2dp" role="sink" encodings="audio/x-sbc audio/mp4a.40 audio/aptx audio/vnd.qcom.aptx.hd audio/vnd.sony.ldac audio/x-celt audio/vnd.qcom.aptx.adaptive audio/vnd.qcom.aptx.twsp audio/x-lc3">
             <profile samplingRates="48000" channelLayouts="LAYOUT_STEREO" formatType="PCM" pcmType="INT_16_BIT" />
         </devicePort>
         <devicePort tagName="bt_ble_headset" deviceType="OUT_HEADSET" connection="bt-le" role="sink" encodings="audio/x-lc3 audio/vnd.qcom.aptx.adaptive.r3 audio/vnd.qcom.aptx.adaptive.r4">
@@ -273,37 +276,40 @@ SPDX-License-Identifier: BSD-3-Clause-Clear
         <!-- end of source DEVICE PORT -->
     </devicePorts>
     <routes>
-        <route type="mix" sink="earpiece" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,haptics_out,telephony_rx" />
-        <route type="mix" sink="speaker" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,haptics_out,telephony_rx,spatializer" />
+        <route type="mix" sink="earpiece" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,telephony_rx" />
+        <route type="mix" sink="speaker" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,telephony_rx,spatializer" />
 
-        <route type="mix" sink="wired_headset" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,haptics_out,telephony_rx,spatializer" />
-        <route type="mix" sink="wired_headphones" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,mmap_no_irq_out,haptics_out,telephony_rx,spatializer" />
+        <route type="mix" sink="wired_headset" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,telephony_rx,spatializer" />
+        <route type="mix" sink="wired_headphones" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,mmap_no_irq_out,telephony_rx,spatializer" />
 
-        <route type="mix" sink="usb_device_out" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,haptics_out,hifi_playback,telephony_rx,bit_perfect_playback,spatializer" />
-        <route type="mix" sink="usb_headset" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,haptics_out,hifi_playback,telephony_rx,bit_perfect_playback,spatializer" />
+        <route type="mix" sink="usb_device_out" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,hifi_playback,telephony_rx,bit_perfect_playback,spatializer" />
+        <route type="mix" sink="usb_headset" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,hifi_playback,telephony_rx,bit_perfect_playback,spatializer" />
 
-        <route type="mix" sink="bt_sco_out" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,haptics_out,telephony_rx" />
-        <route type="mix" sink="bt_sco_headset" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,haptics_out,telephony_rx" />
-        <route type="mix" sink="bt_sco_car_kit" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,haptics_out,telephony_rx" />
+        <route type="mix" sink="bt_sco_out" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,telephony_rx" />
+        <route type="mix" sink="bt_sco_headset" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,telephony_rx" />
+        <route type="mix" sink="bt_sco_car_kit" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,telephony_rx" />
 
-        <route type="mix" sink="bt_a2dp_out" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,haptics_out,spatializer" />
-        <route type="mix" sink="bt_a2dp_headphones" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,haptics_out,spatializer" />
-        <route type="mix" sink="bt_a2dp_speaker" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,haptics_out" />
+        <route type="mix" sink="bt_a2dp_out" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,spatializer" />
+        <route type="mix" sink="bt_a2dp_headphones" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,spatializer" />
+        <route type="mix" sink="bt_a2dp_speaker" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out" />
 
-        <route type="mix" sink="bt_ble_speaker" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,haptics_out,telephony_rx" />
-        <route type="mix" sink="bt_ble_headset" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,haptics_out,telephony_rx,mmap_no_irq_out,spatializer" />
+        <route type="mix" sink="bt_ble_speaker" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,telephony_rx" />
+        <route type="mix" sink="bt_ble_headset" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,telephony_rx,mmap_no_irq_out,spatializer" />
         <route type="mix" sink="bt_ble_broadcast" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out" />
 
-        <route type="mix" sink="line_out" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,haptics_out,telephony_rx" />
+        <route type="mix" sink="line_out" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,mmap_no_irq_out,telephony_rx" />
 
-        <route type="mix" sink="hdmi_out" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out,haptics_out" />
+        <route type="mix" sink="hdmi_out" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,voip_playback,raw_out" />
 
-        <route type="mix" sink="proxy_out" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,haptics_out" />
+        <route type="mix" sink="proxy_out" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out" />
 
-        <route type="mix" sink="ip_out" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out,haptics_out" />
+        <route type="mix" sink="ip_out" sources="low_latency_out,deep_buffer_out,direct_pcm_out,compress_offload_out" />
 
         <route type="mix" sink="fm_out" sources="low_latency_out" />
-        <route type="mix" sink="primary_in" sources="built_in_mic,built_in_back_mic,wired_headset_mic,bt_sco_headset_mic,telephony_rx,bt_a2dp_mic,echo_reference_mic,bt_le_mic,ip_input_device" />
+        <!-- input routes -->
+        <!-- #ifdef OPLUS_FEATURE_AUDIO_BINAURAL_RECORD -->
+        <!-- YeWenlinag@MULTIMEDIA.AUDIODRIVER.HAL, 2024/06/05, Modify for binaural record -->
+        <route type="mix" sink="primary_in" sources="built_in_mic,built_in_back_mic,wired_headset_mic,bt_sco_headset_mic,fm_tuner_mic,telephony_rx,bt_a2dp_mic,echo_reference_mic,bt_le_mic,ip_input_device" />
         <!--
         <route type="mix" sink="primary_in" sources="built_in_mic,built_in_back_mic,wired_headset_mic,bt_sco_headset_mic,fm_tuner_mic,telephony_rx,bt_a2dp_mic,echo_reference_mic,bt_le_mic,proxy_input_device,ip_input_device" />
         -->
