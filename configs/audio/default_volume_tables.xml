@@ -142,8 +142,8 @@
         <point>60,-1400</point>
         <point>65,-1100</point>
         <point>70,-700</point>
-        <point>75,-450</point>
-        <point>80,-250</point>
+        <point>75,-400</point>
+        <point>80,-150</point>
     <!-- #endif /* OPLUS_BUG_STABILITY */ -->
     </reference>
     <reference name="DEFAULT_DEVICE_CATEGORY_HEADSET_VOLUME_CURVE">
@@ -164,21 +164,21 @@
         <point>100,0</point>
     #else /* OPLUS_BUG_STABILITY */ -->
         <point>1,-7000</point>
-        <point>5,-5650</point>
-        <point>10,-4600</point>
-        <point>15,-3800</point>
-        <point>20,-3250</point>
-        <point>25,-2750</point>
-        <point>30,-2350</point>
-        <point>35,-2000</point>
-        <point>40,-1700</point>
-        <point>45,-1500</point>
-        <point>50,-1300</point>
+        <point>5,-5500</point>
+        <point>10,-4500</point>
+        <point>15,-3700</point>
+        <point>20,-3100</point>
+        <point>25,-2600</point>
+        <point>30,-2200</point>
+        <point>35,-1900</point>
+        <point>40,-1600</point>
+        <point>45,-1400</point>
+        <point>50,-1250</point>
         <point>55,-1100</point>
-        <point>60,-800</point>
-        <point>65,-650</point>
-        <point>70,-500</point>
-        <point>75,-150</point>
+        <point>60,-950</point>
+        <point>65,-800</point>
+        <point>70,-600</point>
+        <point>75,-300</point>
         <point>80,0</point>
     <!-- #endif /* OPLUS_BUG_STABILITY */ -->
     </reference>

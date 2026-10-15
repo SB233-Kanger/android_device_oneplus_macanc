@@ -24,11 +24,8 @@
              </string-array>
     -->
     <string-array translatable="false" name="config_logicalZoomRatios">
-        <item>0</item> <item>0.67</item> <item>0.67000002</item>
-        <item>0</item> <item>1.0</item>  <item>1.0</item>
-        <item>0</item> <item>3.5</item>  <item>3.5</item>
-        <item>0</item> <item>7.0</item>  <item>7.0</item>
-        <item>1</item> <item>1.0</item>  <item>1.0</item>
-        <item>1</item> <item>2.0</item>  <item>2.0</item>
+        <item>0</item> <item>0.6</item> <item>0.60000002</item>
+        <item>0</item> <item>1.0</item>  <item>1.00000000</item>
+        <item>0</item> <item>2.0</item>  <item>2.00000000</item>
     </string-array>
 </resources>

@@ -1,6 +1,5 @@
-# Regional properties
-import /odm/etc/${ro.boot.prjname}/build.default.prop
-ro.product.property_source_order=odm,vendor,product,system_ext,system
+# Radio
+ro.vendor.oplus.regionmark=CN
 
 # Sensors
 ro.vendor.oplus.sensor.brl_receive=true

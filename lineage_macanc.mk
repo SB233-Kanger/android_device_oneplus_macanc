@@ -8,23 +8,21 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Inherit from infiniti device
-$(call inherit-product, device/oneplus/infiniti/device.mk)
+$(call inherit-product, device/oneplus/macanc/device.mk)
 
 # Inherit some common Lineage stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
-PRODUCT_NAME := lineage_infiniti
-PRODUCT_DEVICE := infiniti
+PRODUCT_NAME := lineage_macanc
+PRODUCT_DEVICE := macanc
 PRODUCT_MANUFACTURER := OnePlus
 PRODUCT_BRAND := OnePlus
-PRODUCT_MODEL := CPH2745
+PRODUCT_MODEL := PLR110
 
 PRODUCT_GMS_CLIENTID_BASE := android-oneplus
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BuildDesc="qssi_64-user 16 BP2A.250605.015 1788440816632 release-keys" \
-    BuildFingerprint=OnePlus/CPH2745IN/OP611FL1:16/BP2A.250605.015/B.R4T3.1abf132_aeee51_aea830:user/release-keys \
-    DeviceName=OP611FL1 \
-    DeviceProduct=CPH2745 \
-    SystemDevice=OP611FL1 \
-    SystemName=CPH2745
+    DeviceName=OP6117L1 \
+    DeviceProduct=PLR110 \
+    SystemDevice=OP6117L1 \
+    SystemName=PLR110
