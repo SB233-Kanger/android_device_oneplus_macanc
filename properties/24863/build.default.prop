@@ -5,3 +5,6 @@ ro.vendor.oplus.radio.esim.feature=2
 
 # NFC
 persist.vendor.nfc.config_file_name=libnfc-mtp-SN220.conf_24863
+
+# Widevine
+vendor.wv.oemcrypto.debug.enable_prov40=true
